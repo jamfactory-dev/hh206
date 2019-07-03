@@ -3,12 +3,6 @@ import { Link, navigate } from "gatsby"
 import { getUser, isLoggedIn, logout } from "../services/auth"
 
 export default () => {
-    const content = { message: "", login: true }
-    if (isLoggedIn()) {
-        content.message = `Hello, ${getUser().username}`
-    } else {
-        content.message = "You are not logged in"
-    }
     return (
         <div
         style={{
@@ -18,13 +12,13 @@ export default () => {
             borderBottom: "1px solid #d1c1e0",
         }}
         >
-        <span>{content.message}</span> 
+        <span>{isLoggedIn() ? getUser().username : null}</span> 
         <nav>
             <Link to="/">Home</Link>
             {` `}
             <Link to="/app/profile">Profile</Link> 
-            {` `}
-            {isLoggedIn() ? (
+            {` `}            
+            {isLoggedIn() ? (            
             <a
                 href="/"
                 onClick={event => {

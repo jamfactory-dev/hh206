@@ -9,7 +9,7 @@ import SEO from "../components/seo"
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-    <h1>Hello {isLoggedIn() ? getUser().name : "world"}!</h1>
+    <h1>Hello {isLoggedIn() ? getUser().username : "world"}!</h1>
     <p>
       {isLoggedIn() ? (
         <>

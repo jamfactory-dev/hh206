@@ -52,18 +52,24 @@ export const handleLogin = ({ username, password }, callbacks) => {
                 }    
             });
             console.log('Successfully logged in!');
-            callbacks.onSuccess();
+            if (!!callbacks.onSuccess) {
+                callbacks.onSuccess();
+            }
         },
 
         onFailure: function (err) {
             console.error(err.message || JSON.stringify(err));
-            callbacks.onFailure();
+            if (!!callbacks.onFailure) {
+                callbacks.onFailure();
+            }
         },
 
         newPasswordRequired: function (userAttributes, requiredAttributes) {
             delete userAttributes.email_verified;
             window.localStorage.setItem("userAttributes", JSON.stringify(userAttributes));
-            callbacks.newPasswordRequired();
+            if (!!callbacks.newPasswordRequired) {
+                callbacks.newPasswordRequired();
+            }
         },
     });
 }
@@ -90,12 +96,16 @@ export const handleNewPassword = (password, callbacks) => {
                 username: user.username,
                 email: userAttributes.email,
             })
-            callbacks.onSuccess();
+            if (!!callbacks.onSuccess) {
+                callbacks.onSuccess();
+            }
         },
 
         onFailure: function (err) {
             console.error(err.message || JSON.stringify(err));
-            callbacks.onFailure();
+            if (!!callbacks.onFailure) {
+                callbacks.onFailure();
+            }
         },
     });
 }
